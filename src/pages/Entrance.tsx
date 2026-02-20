@@ -6,9 +6,18 @@ export default function Entrance() {
   const [step, setStep] = useState<'click' | 'opening' | 'main'>('click');
 
   useEffect(() => {
+    // Check if user has already visited the entrance in this session
+    const hasVisited = sessionStorage.getItem('hasVisitedEntrance');
+    if (hasVisited) {
+      setStep('main');
+    }
+  }, []);
+
+  useEffect(() => {
     if (step === 'opening') {
       const timer = setTimeout(() => {
         setStep('main');
+        sessionStorage.setItem('hasVisitedEntrance', 'true');
       }, 3500); // Opening duration
       return () => clearTimeout(timer);
     }
@@ -53,6 +62,15 @@ export default function Entrance() {
         animate={{ opacity: step === 'main' ? 1 : 0 }}
         transition={{ duration: 1.5 }}
       >
+        {/* Shading Effect Overlay for smooth entrance when skipping */}
+        <motion.div 
+           initial={{ opacity: 1 }}
+           animate={{ opacity: 0 }}
+           transition={{ duration: 1.5, ease: "easeOut" }}
+           className="absolute inset-0 bg-black pointer-events-none z-50"
+           style={{ display: step === 'main' ? 'block' : 'none' }}
+        />
+
         <motion.div
           initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
           animate={step === 'main' ? { opacity: 1, scale: 1, filter: 'blur(0px)' } : {}}
@@ -161,3 +179,4 @@ export default function Entrance() {
     </div>
   );
 }
+
