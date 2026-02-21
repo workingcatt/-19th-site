@@ -1,29 +1,43 @@
 import { motion } from 'framer-motion';
 
 export default function Webtoon() {
+  const images = [
+    "https://itimg.kr/809/웹툰모음/탐정아카데미.re/1.png",
+    "https://itimg.kr/809/웹툰모음/탐정아카데미.re/2.png",
+    "https://itimg.kr/809/웹툰모음/탐정아카데미.re/3.png",
+    "https://itimg.kr/809/웹툰모음/탐정아카데미.re/4.png"
+  ];
+
   return (
-    <div className="min-h-screen pt-24 px-4 flex items-center justify-center bg-[#0a0a0a]">
+    <div className="min-h-screen pt-24 px-4 pb-20 bg-[#0a0a0a] flex flex-col items-center">
       <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center p-12 border border-white/10 rounded-sm bg-[#121212] max-w-2xl w-full shadow-2xl relative overflow-hidden"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-12"
       >
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
-        
         <h1 className="text-4xl md:text-5xl font-display text-amber-600 mb-2">WEBTOON ARCHIVE</h1>
-        <p className="text-gray-500 font-serif mb-10">웹툰 아카이브</p>
-        
-        <div className="w-full aspect-[4/3] bg-black/50 rounded flex flex-col items-center justify-center border border-white/5 relative group">
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
-          
-          <span className="text-3xl font-display text-gray-700 mb-2 group-hover:text-amber-800 transition-colors">ACCESS DENIED</span>
-          <span className="text-sm font-serif text-gray-600">접근 권한이 부족합니다.</span>
-          
-          <div className="mt-8 px-4 py-1 border border-red-900/30 text-red-900/50 text-xs font-mono">
-            ERROR_CODE: 19TH_ARCHIVE_LOCKED
-          </div>
-        </div>
+        <p className="text-gray-500 font-serif">탐정 아카데미 RE</p>
       </motion.div>
+
+      <div className="max-w-3xl w-full flex flex-col gap-0 shadow-2xl bg-black">
+        {images.map((src, index) => (
+          <motion.img
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            src={src}
+            alt={`Webtoon Page ${index + 1}`}
+            className="w-full h-auto block"
+            loading="lazy"
+          />
+        ))}
+      </div>
+      
+      <div className="mt-12 text-center text-gray-600 font-serif text-sm">
+        <p>- End of Chapter -</p>
+      </div>
     </div>
   );
 }

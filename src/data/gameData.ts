@@ -433,6 +433,6 @@ export const CHARACTERS: Character[] = [
     features: "런던 노동조합의 리더+빅토리아의 골칫거리+22세",
     ability: "설계: 자신이 상상한 것을 빠르게 설계 가능",
     code: "OP",
-    affiliation: "Royal Family",
+    affiliation: "기타",
   },
 ];
